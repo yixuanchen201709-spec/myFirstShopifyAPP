@@ -1,7 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { ShopifyProvider, CartProvider } from '@shopify/hydrogen-react';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {ShopifyProvider, CartProvider} from '@shopify/hydrogen-react';
 import App from './App';
+import Homepage from './pages/Homepage';
+import ProductsPage from './pages/ProductsPage';
+import ProductDetail from './pages/ProductDetail';
+import CartPage from './pages/CartPage';
+import CollectionsPage from './pages/CollectionsPage';
+import CollectionDetail from './pages/CollectionDetail';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -14,7 +21,17 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       languageIsoCode="EN"
     >
       <CartProvider>
-        <App />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/products" element={<ProductsPage />} />
+            <Route path="/products/:handle" element={<ProductDetail />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/collections" element={<CollectionsPage />} />
+            <Route path="/collections/:handle" element={<CollectionDetail />} />
+            <Route path="*" element={<Homepage />} />
+          </Routes>
+        </BrowserRouter>
       </CartProvider>
     </ShopifyProvider>
   </React.StrictMode>
