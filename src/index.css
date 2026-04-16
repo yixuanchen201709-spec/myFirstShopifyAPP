@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-body bg-blush text-charcoal antialiased;
+  }
+}
+
+@layer components {
+  .marquee { @apply overflow-hidden whitespace-nowrap; }
+  .marquee-content {
+    @apply inline-block;
+    animation: marquee 20s linear infinite;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-float { animation: float 3s ease-in-out infinite; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background: linear-gradient(135deg, #C9A84C 0%, #E8D5A3 50%, #C9A84C 100%);
+  }
+
+  .product-card { @apply transition-all duration-300 ease-in-out; }
+  .product-card:hover { @apply -translate-y-2; }
+  .product-card:hover .product-image { @apply scale-105; }
+  .product-image { @apply transition-transform duration-500 ease-in-out; }
+
+  .btn-primary { @apply transition-all duration-300 ease-in-out; }
+  .btn-primary:hover {
+    @apply -translate-y-0.5;
+    box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
+  }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, #FDF2F8 0%, #FCE7F3 50%, #F9A8D4 100%);
+  }
+
+  .nav-dropdown {
+    @apply absolute top-full left-0 w-48 bg-white border border-blush-light rounded-lg shadow-xl py-2 mt-2;
+    @apply opacity-0 invisible -translate-y-2 transition-all duration-300;
+  }
+  .nav-item:hover .nav-dropdown { @apply opacity-100 visible translate-y-0; }
+
+  *:focus-visible { @apply outline-2 outline-offset-2; outline-color: #C9A84C; }
+
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #FDF2F8; }
+  ::-webkit-scrollbar-thumb { background: #F9A8D4; border-radius: 4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-content { animation: none; }
+  .animate-float { animation: none; }
+}
